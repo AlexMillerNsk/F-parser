@@ -361,3 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+build/
+release/
+releasev20/
+.idea/
+*.sln.DotSettings.user
