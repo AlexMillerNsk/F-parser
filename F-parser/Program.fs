@@ -14,16 +14,22 @@ let MessagesFilePath = Comb [ MessagesDir; MessagesFileName ]
 
 
 let PrintValues  = List.iter(fun x -> printfn $"{x}")
-let printNames() = MessagesFilePath |> CountUniqueUserNames  |> PrintValues
-let ermsgs() = (ParseLogs LogsDir)|> List.filter (fun x -> x.Type = Error)|>List.map (fun x -> x.Text)|>List.distinct|> List.iter(fun x -> printfn $"ERROR{x}")
+let PrintNames() = MessagesFilePath |> CountUniqueUserNames  |> PrintValues
+let PrintGroupErrMsg() = 
+    (ParseLogs LogsDir)
+    |>List.filter (fun x -> x.Type = Error)
+    |>List.map    (fun x -> x.Text)|>List.groupBy id
+    |>List.map    (fun (x, g) -> x, g.Length)
+    |>List.sortBy (fun (_, x) -> x)
+    |>List.iter   (fun x -> printfn $"{x}")
 
 
 printfn "-------------------------------------------\n"
-ermsgs()
+PrintGroupErrMsg()
  
-printfn "-------------------------------------------\n"
+printfn "-------------------------------------------\n" 
 
-printNames()
+PrintNames()
 
 printfn "-------------------------------------------\n"
 

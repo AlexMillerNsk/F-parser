@@ -1,6 +1,5 @@
 ﻿module Library
 
-open System
 open System.IO
 open Types
 open FSharp.Data
